@@ -22,6 +22,7 @@ app.get('/', (req, res) => {
 
 //Routes
 app.post('/api/v1/books', Auth.verifyToken, Book.create);
+app.get('/api/v1/books/allbooks', Auth.verifyToken, Book.getAllBooks);
 app.get('/api/v1/books', Auth.verifyToken, Book.getMyBooks);
 app.get('/api/v1/books/:id', Auth.verifyToken, Book.getOne);
 app.put('/api/v1/books/:id', Auth.verifyToken, Book.update);

@@ -30,6 +30,17 @@ const Book = {
       return res.status(400).send(error);
     }
   },
+
+  // get all books
+  async getAllBooks(req, res) {
+    const findAllQuery = 'SELECT * FROM books';
+    try {
+      const { rows, rowCount } = await db.query(findAllQuery, []);
+      return res.status(200).send({"books": rows});
+    } catch(error) {
+      return res.status(400).send(error);
+    }
+  },
   /**
    * Get All Reflections
    * @param {object} req 
@@ -40,7 +51,7 @@ const Book = {
     const findAllQuery = 'SELECT * FROM books where owner_id = $1';
     try {
       const { rows, rowCount } = await db.query(findAllQuery, [req.user.id]);
-      return res.status(200).send({"title": rows[0].title});
+      return res.status(200).send({"books": rows});
     } catch(error) {
       return res.status(400).send(error);
     }

@@ -1,6 +1,7 @@
 const { Pool } = require('pg');
 const dotenv = require('dotenv');
 const uuidv4 = require('uuid/v4');
+var moment = require('moment');
 dotenv.config();
 
 const pool = new Pool({
@@ -57,21 +58,6 @@ const createBooksTable = () => {
 					});
 				}
 
-// create admin users
-const createAdminUser = () => {
-	const queryText = `INSERT INTO users 
-	(id, email, password, created_date, modified_date, role) 
-	VALUES(df3dee82-68f9-47f5-b435-6d8b2d1ea713, 'ambrose@gmail.com', '123456', ' ', ' ', 'admin')`;
-					pool.query(queryText).then((res) => {
-							console.log(res);
-							pool.end();
-			        })
-					.catch((err) => {
-						console.log(err);
-					    pool.end();
-					});
-				}
-
 // drop users table
 const dropUsersTable = () => {
 	const queryText = 'DROP TABLE IF EXISTS users returning *';
@@ -100,40 +86,36 @@ const dropBooksTable = () => {
 	});
 }
 
-//try documentation
+//create admin user
 async function createAdminUsers(){
-const text = 'INSERT INTO users(id, email, password, created_date, modified_date, role) VALUES($1, $2) RETURNING *'
-const values = [uuidv4(),'ambrose@gmail.com', '123456', ' ', ' ']
+	const text = 'INSERT INTO users(id, email, password, created_date, modified_date, role) VALUES($1, $2, $3, $4, $5, $6) RETURNING *'
+	const values = [uuidv4(),'ambrose@gmail.com', process.env.admin_password, moment(new Date()),
+	      moment(new Date()), 'admin']
 
-// callback
-pool.query(text, values, (err, res) => {
-  if (err) {
-    console.log(err.stack)
-  } else {
-    console.log(res.rows[0])
-    // { name: 'brianc', email: 'brian.m.carlson@gmail.com' }
-  }
-})
+	// callback
+	pool.query(text, values, (err, res) => {
+	  if (err) {
+	    console.log(err.stack)
+	  } else {
+	    console.log(res.rows[0])
+	  }
+	})
 
-// promise
-pool.query(text, values)
-  .then(res => {
-    console.log(res.rows[0])
-    // { name: 'brianc', email: 'brian.m.carlson@gmail.com' }
-  })
-  .catch(e => console.error(e.stack))
+	// promise
+	pool.query(text, values)
+	  .then(res => {
+	    console.log(res.rows[0])
+	  })
+	  .catch(e => console.error(e.stack))
 
-// async/await
-try {
-  const res = await pool.query(text, values)
-  console.log(res.rows[0])
-  // { name: 'brianc', email: 'brian.m.carlson@gmail.com' }
-} catch(err) {
-  console.log(err.stack)
+	// async/await
+	try {
+	  const res = await pool.query(text, values)
+	  console.log(res.rows[0])
+	} catch(err) {
+	  console.log(err.stack)
+	}
 }
-
-}
-//end docume
 
 // create all tables
 const createAllTables = () => {
@@ -144,7 +126,7 @@ const createAllTables = () => {
 //create admin user
 const createAllAdmins = () => {
 	createAdminUsers();
-	createAdminUser();
+	// createAdminUser();
 }
 
 // drop all tables

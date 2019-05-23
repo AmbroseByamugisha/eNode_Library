@@ -2,6 +2,7 @@ const { Pool } = require('pg');
 const dotenv = require('dotenv');
 const uuidv4 = require('uuid/v4');
 var moment = require('moment');
+var bcrypt = require('bcryptjs');
 dotenv.config();
 
 const pool = new Pool({
@@ -87,9 +88,14 @@ const dropBooksTable = () => {
 }
 
 //create admin user
+// hash admin password
+function hashPassword(password) {
+    return bcrypt.hashSync(password, bcrypt.genSaltSync(8))
+  }
 async function createAdminUsers(){
-	const text = 'INSERT INTO users(id, email, password, created_date, modified_date, role) VALUES($1, $2, $3, $4, $5, $6) RETURNING *'
-	const values = [uuidv4(),'ambrose@gmail.com', process.env.admin_password, moment(new Date()),
+	const text = 'INSERT INTO users(id, email, password, created_date, modified_date, role) VALUES($1, $2, $3, $4, $5, $6) RETURNING *';
+	const hashedPassword = hashPassword(process.env.admin_password);
+	const values = [uuidv4(),'ambrose@gmail.com', hashedPassword, moment(new Date()),
 	      moment(new Date()), 'admin']
 
 	// callback
@@ -144,6 +150,7 @@ module.exports = {
 	createUsersTable,
 	createBooksTable,
 	createAllTables,
+	hashPassword,
 	createAllAdmins,
 	createAdminUsers,
 	dropUsersTable,

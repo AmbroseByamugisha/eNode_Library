@@ -25,7 +25,9 @@ const Book = {
 
     try {
       const { rows } = await db.query(createQuery, values);
-      return res.status(201).send(rows[0]);
+      return res.status(201).send({
+        "message": "book created successfully",
+        "book":rows[0]});
     } catch(error) {
       return res.status(400).send(error);
     }

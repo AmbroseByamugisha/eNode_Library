@@ -2,9 +2,28 @@
 <html>
 <head>
 	<title>Home Page</title>
+	<script src="js/books.js"></script>
+	<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 	<h1>Welcome Home</h1>
-
+	<h3>All Books</h3>
+	<!-- <div id="books-list">
+		<p id='details-btn'></p>
+		<p id='book-details'></p>
+	</div> -->
+	<div id="books-list" ></div>
+	<p id="book-details"></p>
+	<h3>Create Book</h3>
+	<form>
+		<label>Title</label>
+		<input type="text" name="title" id="title">
+		<label>Author</label>
+		<input type="text" name="author" id="author">
+	</form>
+	<button onclick="createBook()">Create Book</button>
+	<br>
+	<a onclick="getMyBooks()">Get My Books</a>
+	<div id="my-books"></div>
 </body>
 </html>

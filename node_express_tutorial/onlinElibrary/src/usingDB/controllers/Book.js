@@ -65,9 +65,9 @@ const Book = {
    * @returns {object} reflection object
    */
   async getOne(req, res) {
-    const text = 'SELECT * FROM books WHERE id = $1 AND owner_id = $2';
+    const text = 'SELECT * FROM books WHERE id=$1';
     try {
-      const { rows } = await db.query(text, [req.params.id, req.user.id]);
+      const { rows } = await db.query(text, [req.params.id]);
       if (!rows[0]) {
         return res.status(404).send({'message': 'book not found'});
       }

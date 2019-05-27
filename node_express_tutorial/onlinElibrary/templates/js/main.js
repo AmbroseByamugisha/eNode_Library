@@ -1,51 +1,19 @@
-token = localStorage.getItem("accesstoken")
-loginUrl = 'http://127.0.0.1:3000/api/v1/users/login';
-
-function login() {
-    let email = document.getElementById('email').value;
-    let password = document.getElementById('password').value;
-    
-
-    let data = {
-        email: email,
-        password: password
-    }
-    fetch(loginUrl, {
-        method: 'POST',
-        mode: 'cors',
-        headers: {'Content-Type': 'application/json', 'x-access-token': `${token}`},
-        body: JSON.stringify(data)
-    })
-    .then(res => res.json())
-    .then(response => {
-        localStorage.setItem("accesstoken", response.token);
-        if (response.message=='user logged in successfully'){    
-            //redirectUser(response.role);
-            window.location.replace('home.html');
-        }    
-        else{
-            alert(response.message);
-            if (response.message=='user does not exist, do you want to signup'){
-                window.location.replace('signup.html');
-            }
-            else{
-                window.location.reload()
-            }
-        }
-    })
-}
-
+token = localStorage.getItem("accesstoken");
 // signup script
 function signup() {
     let email = document.getElementById('email').value;
     let password = document.getElementById('password').value;
     
-    const url = 'http://127.0.0.1:5000/api/v1/users';
+    const url = 'http://127.0.0.1:9000/api/v1/users';
 
     let data = {
         email: email,
         password: password
     }
+    console.log(data);
+    var t = JSON.stringify(data);
+    console.log(t);
+    console.log(typeof(t));
     fetch(url, {
         method: 'POST',
         mode: 'cors',
@@ -60,3 +28,29 @@ function signup() {
         }
     })
 }
+
+// // get books
+// function fetchAll(){
+
+//     const msgUrl = 'http://127.0.0.1:9000/api/v1/books/allbooks';
+
+//     fetch(msgUrl, {
+//         method: 'GET',
+//         mode: 'no-cors',
+//         headers: {
+//             'Content-Type': 'application/json', 'Authorization': `x-access-token ${token}`
+//         }
+//     })
+//     .then(res => res.json())
+//     .then(response => {
+//         data = response.books;
+//         data.forEach(function(item, index, array) {
+//             console.log(item["title"]);
+//             var title = item["title"];
+//             document.getElementById("books-list").innerHTML += (title
+//                     +"<br>");
+//             });
+//         });
+        
+//     }  
+//     fetchAll()

@@ -92,7 +92,7 @@ const User = {
         return res.status(200).send({'message': 'user deleted'});
         if(!rows[0]) {
         return res.status(404).send({'message': 'user not found'});
-      }
+        }
       }
       else{
         return res.status(403).send({'message': 'Permission Denied'});

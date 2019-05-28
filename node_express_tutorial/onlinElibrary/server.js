@@ -36,6 +36,7 @@ app.put('/api/v1/books/:id', Auth.verifyToken, Book.update);
 app.delete('/api/v1/books/:id', Auth.verifyToken, Book.delete);
 app.post('/api/v1/users', UserWithDb.create);
 app.post('/api/v1/users/login',UserWithDb.login);
+app.get('/api/v1/users', Auth.verifyToken, UserWithDb.getAllUsers);
 app.delete('/api/v1/users/:id', Auth.verifyToken, UserWithDb.delete);
 
 const PORT = 9000

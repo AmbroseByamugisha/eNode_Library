@@ -74,6 +74,25 @@ const User = {
       return res.status(400).send(error)
     }
   },
+
+  //get all users
+  async getAllUsers(req, res) {
+    const checkAdminQuery = 'SELECT * FROM users WHERE id = $1';
+    const { rows } = await db.query(checkAdminQuery, [req.user.id]);
+    if(rows[0].role == 'admin') {
+      const findAllUsersQuery = 'SELECT * FROM users';
+      try {
+        const { rows, rowCount } = await db.query(findAllUsersQuery, []);
+        return res.status(200).send({"users": rows});
+      } catch(error) {
+        return res.status(400).send(error);
+        }
+      }
+      else{
+        return res.status(403).send({'message': 'Permission Denied'});
+      }
+  },
+
   /**
    * Delete A User
    * @param {object} req 
@@ -97,20 +116,8 @@ const User = {
       else{
         return res.status(403).send({'message': 'Permission Denied'});
       }
-    }
-      
-    //end
-    // try {
-    //   const deleteQuery = 'DELETE FROM users WHERE id=$2 returning *';
-    //   const { rows } = await db.query(deleteQuery, [req.params.id]);
-    //   if(!rows[0]) {
-    //     return res.status(404).send({'message': 'user not found'});
-    //   }
-    //   return res.status(204).send({ 'message': 'deleted' });
-    // } catch(error) {
-    //   return res.status(400).send(error);
-    // }
+    }    
   }
-//}
+
 
 export default User;

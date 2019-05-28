@@ -3,16 +3,22 @@
 <head>
 	<title>Home Page</title>
 	<script src="js/books.js"></script>
+	<script src="js/users.js"></script>	
 	<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 	<h1>Welcome Home</h1>
+	<a onclick="fetchAllUsers()">Get Users</a>
+	<p id="users-list"></p>
+	<p id="usr-btn"></p>
+	<br>
 	<h3>All Books</h3>
 	<!-- <div id="books-list">
 		<p id='details-btn'></p>
 		<p id='book-details'></p>
 	</div> -->
 	<div id="books-list" ></div>
+	<p id="book-btn"></p>
 	<p id="book-details"></p>
 	<h3>Create Book</h3>
 	<form>
@@ -25,5 +31,7 @@
 	<br>
 	<a onclick="getMyBooks()">Get My Books</a>
 	<div id="my-books"></div>
+	<br>
+	
 </body>
 </html>

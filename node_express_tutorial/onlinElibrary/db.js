@@ -47,7 +47,7 @@ const createBooksTable = () => {
 				owner_id UUID NOT NULL,
 				created_date TIMESTAMP,
 				modified_date TIMESTAMP,
-				FOREIGN KEY (owner_id) REFERENCES users (id) ON UPDATE NO ACTION )`;
+				FOREIGN KEY (owner_id) REFERENCES users (id) ON DELETE NO ACTION ON UPDATE NO ACTION )`;
 				pool.query(queryText)
 					.then((res) => {
 						console.log(res);

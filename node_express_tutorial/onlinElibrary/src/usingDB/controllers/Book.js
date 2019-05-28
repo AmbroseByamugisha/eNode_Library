@@ -100,7 +100,9 @@ const Book = {
         req.user.id
       ];
       const response = await db.query(updateOneQuery, values);
-      return res.status(200).send(response.rows[0]);
+      return res.status(200).send({
+        "message": "book updated successfully",
+        "book":response.rows[0]});
     } catch(err) {
       return res.status(400).send(err);
     }
@@ -118,7 +120,7 @@ const Book = {
       if(!rows[0]) {
         return res.status(404).send({'message': 'book not found'});
       }
-      return res.status(204).send({ 'message': 'book deleted' });
+      return res.status(200).send({ 'message': 'book deleted' });
     } catch(error) {
       return res.status(400).send(error);
     }

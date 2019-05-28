@@ -23,24 +23,26 @@ function fetchAllBooks(){
             var getItembutton = document.createElement("button");
             var t = document.createTextNode(book_id);
             getItembutton.appendChild(t);
-            document.getElementById("book-btn").appendChild(getItembutton);
+            //document.getElementById("book-btn").appendChild(getItembutton);
             getItembutton.innerHTML = "Book details";
             //create Edit button
             var editItembutton = document.createElement("button");
             var t = document.createTextNode(book_id);
             editItembutton.appendChild(t);
-            document.getElementById("book-btn").appendChild(editItembutton);
+            //document.getElementById("book-btn").appendChild(editItembutton);
             editItembutton.innerHTML = "Edit Book";
 
             //create Delete Item button
             var deleteItembutton = document.createElement("button");
             var t = document.createTextNode(book_id);
             deleteItembutton.appendChild(t);
-            document.getElementById("book-btn").appendChild(deleteItembutton);
+            //document.getElementById("book-btn").appendChild(deleteItembutton);
             deleteItembutton.innerHTML = "Delete Book";
-            document.getElementById("books-list").innerHTML += (title
-                    +"<br>");
-            //document.getElementById("books-list").appendChild(newbutton);
+            //try
+            var mybook = document.createElement("a");
+            var q = document.createTextNode(title);
+            mybook.appendChild(q);
+            document.getElementById("books-list").appendChild(mybook);
             getItembutton.addEventListener('click', () => {
                 fetch(`http://127.0.0.1:9000/api/v1/books/${book_id}`, {
                     method: 'GET',
@@ -66,9 +68,11 @@ function fetchAllBooks(){
                     })
                     .then(window.location.reload())
                 })
-            //end delete button
-            editItembutton.addEventListener('click', () => {
-                window.location.replace('update.html');
+
+            mybook.addEventListener('click', ()=> {
+                document.getElementById("book-btn").appendChild(getItembutton);
+                document.getElementById("book-btn").appendChild(editItembutton);
+                document.getElementById("book-btn").appendChild(deleteItembutton);
             })
             });
         });

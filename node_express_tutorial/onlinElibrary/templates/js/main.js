@@ -50,7 +50,7 @@ function login() {
     .then(response => {
         localStorage.setItem("accesstoken",response.token);
         if (response.message=='user logged in successfully'){    
-            window.location.replace('home.html');;
+            window.location.replace('home.html');
         }    
         else{
             alert(response.message);

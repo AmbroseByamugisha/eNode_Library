@@ -47,3 +47,17 @@ function fetchAllUsers(){
         });
         
     }
+    // //edit button logic
+    // editItembutton.addEventListener('click', () => {
+    //     fetch(`http://127.0.0.1:9000/api/v1/books/${book_id}`, {
+    //             method: 'PUT',
+    //             mode: 'cors',
+    //             headers: {'Content-Type': 'application/json', 'x-access-token':`${token}`},
+    //             body: JSON.stringify({title: "updated", author: "updated"}) 
+    //         })
+    //         //.then(res.json())
+    //         .then(response => {
+    //             console.log("updated")
+    //             window.location.reload();
+    //         })
+    // })

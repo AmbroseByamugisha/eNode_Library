@@ -19,6 +19,7 @@ function fetchAllBooks(){
             console.log(item["title"]);
             var title = item["title"];
             var book_id = item["id"];
+            var author = item["author"];
             //create get Item button
             var getItembutton = document.createElement("button");
             var t = document.createTextNode(book_id);
@@ -68,6 +69,64 @@ function fetchAllBooks(){
                     })
                     .then(window.location.reload())
                 })
+            //end delete button logic
+            
+            //start
+            editItembutton.addEventListener('click', () => {
+                data1 = {}; 
+
+                var i = document.createElement("input"); //input element, text
+                i.setAttribute('type',"text");
+                i.setAttribute('name',"title");
+                i.addEventListener("input", () => {
+                    //console.log(i.value);
+                    let e = i.value;
+                    data1.title = e;
+                    
+                })
+                var j = document.createElement("input"); //input element, text
+                j.setAttribute('type',"text");
+                j.setAttribute('name',"author");
+                j.addEventListener("input", () => {
+                    //console.log(j.value);
+                    let h = j.value;
+                    data1.author = h;
+                })
+                var s = document.createElement("button");
+                document.getElementById('edit-title').appendChild(i);
+                document.getElementById('edit-author').appendChild(j);
+                document.getElementById('edit-btn').appendChild(s);
+                s.innerText = 'Edit Book'
+                s.addEventListener('click', () => {
+                    fetch(`http://127.0.0.1:9000/api/v1/books/${book_id}`, {
+                        method: 'PUT',
+                        mode: 'cors',
+                        headers: {'Content-Type': 'application/json', 'x-access-token':`${token}`},
+                        body: JSON.stringify(data1) 
+                    })
+                    //.then(res.json())
+                    .then(response => {
+                        console.log("updated");
+                        window.location.reload();
+                    })
+                })
+
+            })
+            //end
+            // //edit button logic
+            // editItembutton.addEventListener('click', () => {
+            //     fetch(`http://127.0.0.1:9000/api/v1/books/${book_id}`, {
+            //             method: 'PUT',
+            //             mode: 'cors',
+            //             headers: {'Content-Type': 'application/json', 'x-access-token':`${token}`},
+            //             body: JSON.stringify({title: "updated", author: "updated"}) 
+            //         })
+            //         //.then(res.json())
+            //         .then(response => {
+            //             console.log("updated")
+            //             window.location.reload();
+            //         })
+            // })
 
             mybook.addEventListener('click', ()=> {
                 document.getElementById("book-btn").appendChild(getItembutton);

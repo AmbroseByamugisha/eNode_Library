@@ -83,7 +83,9 @@ const User = {
       const findAllUsersQuery = 'SELECT * FROM users';
       try {
         const { rows, rowCount } = await db.query(findAllUsersQuery, []);
-        return res.status(200).send({"users": rows});
+        return res.status(200).send({
+          "message": "all users fetched successfully",
+          "users": rows});
       } catch(error) {
         return res.status(400).send(error);
         }

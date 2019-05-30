@@ -1,6 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 var cors = require('cors');
+var exphbs = require('express-handlebars');
 import dotenv from 'dotenv';
 import 'babel-polyfill';
 import BookWithDB from './src/usingDB/controllers/Book';
@@ -14,6 +15,7 @@ const app = express()
 // Parse incoming requests data
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
+
 
 //static files middleware
 app.use(express.static('templates'));

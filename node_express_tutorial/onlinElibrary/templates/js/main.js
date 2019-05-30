@@ -24,7 +24,11 @@ function signup() {
     .then(response => {
         alert(response.message);
         if (response.message=="User created successfully"){
-        window.location.replace('base.html');
+            console.log("signed up");
+            window.location.replace('base.html');
+        }
+        else{
+            window.location.replace('base.html');
         }
     })
 }
@@ -49,7 +53,8 @@ function login() {
     .then(res => res.json())
     .then(response => {
         localStorage.setItem("accesstoken",response.token);
-        if (response.message=='user logged in successfully'){    
+        if (response.message=='user logged in successfully'){
+            console.log("logged in");    
             window.location.replace('home.html');
         }    
         else{
@@ -64,3 +69,6 @@ function login() {
     })
 }
 
+function scrollPage(){
+    window.scrollBy(0, 100);
+}

@@ -2,19 +2,58 @@
 <html>
 <head>
 	<title>Elibrary</title>
-	<script src="js/main.js"></script>
+	
+	<!-- bootstrap cdn -->
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+	<script src="js/main.js"></script>	
+	<link rel="stylesheet" href="css/base.css">
 </head>
 <body>
-<h1>Welcome to the Library</h1>
-<form>
-	<h3>Login here</h3>
-	<label>Email</label>
-	<input type="text" name="email" id="email">
-	<label>Password</label>
-	<input type="password" name="password" id="password">
-</form>
-<button onclick="login()">Login</button>
-<br>
-<a href="signup.html">if you dont have an accout yet, sign up here</a>
+	<div class="container">
+		<!--jumbotron-->
+		<div class="jumbotron">
+			<h1 class="display-4">Ambrose Library!</h1>
+			<p class="lead">This is a simple online library with all my favorite books</p>
+			<hr class="my-4">
+			<p>Simply signup and get access to the most bad-ass books to blow your brains out</p>
+			<p class="lead">
+				<a class="btn btn-primary btn-lg" role="button" onclick="scrollPage()">Learn more</a>
+			</p>
+		</div>
+		<!-- end of jumbotron-->
+		<div class="row">
+			<div class="col-2">
+
+			</div>
+			<div class="col-8">
+			<div id="col-1" class="col align-self-center">
+				<!-- bootstrap form-->
+				<form>
+					<div class="form-group">
+						<h3>Login here</h3>
+						<label for="exampleInputEmail1">Email address</label>
+						<input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
+						<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+					</div>
+					<div class="form-group">
+						<label for="exampleInputPassword1">Password</label>
+						<input type="password" class="form-control" id="password" placeholder="Password">
+					</div>
+					<div class="form-check">
+						<input type="checkbox" class="form-check-input" id="exampleCheck1">
+						<label class="form-check-label" for="exampleCheck1">Check me out</label>
+					</div>
+					<button type="submit" class="btn btn-primary" onclick="login()">Submit</button>
+				</form>
+				<a href="signup.html">if you dont have an accout yet, sign up here</a>
+				<!-- end bootstrap form-->
+			</div>
+		</div>
+		<div class="col-2">
+
+		</div> 
+	</div>
+</div>
 </body>
 </html>

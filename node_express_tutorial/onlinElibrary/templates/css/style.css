@@ -1,7 +1,7 @@
 a {
     color: blue;
     text-decoration: underline;
-    display: block;
+    display: block; 
 }
 a:hover{
     cursor: pointer;
@@ -26,3 +26,6 @@ a:link {
   a:active {
     color: yellow;
   }
+ h1 {
+   text-align: center;
+ }

@@ -28,7 +28,8 @@ function signup() {
             window.location.replace('base.html');
         }
         else{
-            window.location.replace('base.html');
+            alert("Not signed up")
+            window.location.reload();
         }
     })
 }
